@@ -38,6 +38,25 @@ class ApplicationController < ActionController::API
     def authorized
         render json: { message: 'Please log in' }, status: :unauthorized unless logged_in?
     end
+
+    def admin_or_self_authorized
+        if current_user && current_user.admin || current_user.id == params[:id]
+            current_user
+        end
+    end
+
+
+    def admin_authorized
+        if current_user && current_user.admin
+            current_user
+        end
+    end
+
+    def agent_authorized
+        if current_user && current_user.agent
+            current_user
+        end
+    end
     
     
     
