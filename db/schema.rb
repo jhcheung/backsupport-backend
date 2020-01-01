@@ -17,12 +17,12 @@ ActiveRecord::Schema.define(version: 2019_12_25_072854) do
 
   create_table "messages", force: :cascade do |t|
     t.string "content"
-    t.bigint "users_id", null: false
-    t.bigint "tickets_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "ticket_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["tickets_id"], name: "index_messages_on_tickets_id"
-    t.index ["users_id"], name: "index_messages_on_users_id"
+    t.index ["ticket_id"], name: "index_messages_on_ticket_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "tickets", force: :cascade do |t|
@@ -46,8 +46,8 @@ ActiveRecord::Schema.define(version: 2019_12_25_072854) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "messages", "tickets", column: "tickets_id"
-  add_foreign_key "messages", "users", column: "users_id"
+  add_foreign_key "messages", "tickets"
+  add_foreign_key "messages", "users"
   add_foreign_key "tickets", "users", column: "customer_id"
   add_foreign_key "tickets", "users", column: "owner_id"
 end

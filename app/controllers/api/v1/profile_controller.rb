@@ -1,7 +1,10 @@
 class Api::V1::ProfileController < ApplicationController
 
     def index
-        render json: { user: UserSerializer.new(current_user) }, status: :accepted
+        options = {
+            include: [:tickets]
+        }  
+        render json: UserSerializer.new(current_user, options).serialized_json, status: :accepted
     end
 
 end
