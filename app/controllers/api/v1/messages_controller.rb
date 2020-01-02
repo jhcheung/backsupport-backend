@@ -1,4 +1,11 @@
 class Api::V1::MessagesController < ApplicationController
+
+    def index
+      messages = Message.all
+
+      render json: MessageSerializer.new(messages).serialized_json
+
+    end
     def create
         message = Message.create(message_params)
         options = {

@@ -22,6 +22,21 @@ class Api::V1::TicketsController < ApplicationController
 
     end
 
+    def toggle
+        ticket = Ticket.find(params[:id])
+
+        options = {
+            include: [:messages, :owner, :customer]
+        }        
+
+        ticket.open = !ticket.open
+        if ticket.save
+            render json: TicketSerializer.new(ticket, options).serialized_json, status: :accepted
+        else
+            render json: { error: 'Failed to toggle ticket' }, status: :not_acceptable
+        end
+    end
+
     def show
         ticket = Ticket.find(params[:id])
         options = {
@@ -29,6 +44,21 @@ class Api::V1::TicketsController < ApplicationController
         }        
 
         render json: TicketSerializer.new(ticket, options).serialized_json
+    end
+
+    def update
+        ticket = Ticket.find(params[:id])
+
+        options = {
+            include: [:messages, :owner, :customer]
+        }        
+
+        if ticket.update(ticket_params)
+            render json: TicketSerializer.new(ticket, options).serialized_json, status: :accepted
+        else
+            render json: { error: 'Failed to update ticket' }, status: :not_acceptable
+        end
+
     end
 
     private
