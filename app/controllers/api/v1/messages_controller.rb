@@ -8,11 +8,15 @@ class Api::V1::MessagesController < ApplicationController
     end
     def create
         message = Message.create(message_params)
+        ticket = Ticket.find(message_params[:ticket_id])
         options = {
             include: [:ticket, :user]
         }        
         if message.valid?
-          render json: MessageSerializer.new(message, options).serialized_json, status: :created
+          serialized_data = MessageSerializer.new(message, options).serialized_json
+          # MessagesChannel.broadcast_to(ticket, serialized_data)
+          ActionCable.server.broadcast('messages_channel', MessageSerializer.new(message, options).serializable_hash)
+          render json: serialized_data, status: :created
         else
           render json: { error: 'Failed to create message' }, status: :not_acceptable
         end

@@ -15,6 +15,7 @@ class Api::V1::TicketsController < ApplicationController
             include: [:messages, :owner, :customer]
         }        
         if ticket.valid?
+            ActionCable.server.broadcast('tickets_channel', TicketSerializer.new(ticket, options).serializable_hash)
           render json: TicketSerializer.new(ticket, options).serialized_json, status: :created
         else
           render json: { error: 'Failed to create ticket' }, status: :not_acceptable
