@@ -14,8 +14,9 @@ class Api::V1::MessagesController < ApplicationController
         }        
         if message.valid?
           serialized_data = MessageSerializer.new(message, options).serialized_json
-          # MessagesChannel.broadcast_to(ticket, serialized_data)
-          ActionCable.server.broadcast('messages_channel', MessageSerializer.new(message, options).serializable_hash)
+          serializable_hash = MessageSerializer.new(message, options).serializable_hash
+          MessagesChannel.broadcast_to(ticket, serializable_hash)
+          # ActionCable.server.broadcast('messages_channel', MessageSerializer.new(message, options).serializable_hash)
           render json: serialized_data, status: :created
         else
           render json: { error: 'Failed to create message' }, status: :not_acceptable
