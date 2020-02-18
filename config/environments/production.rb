@@ -37,7 +37,7 @@ Rails.application.configure do
   config.action_cable.allowed_request_origins = ['https://backsupport-client.herokuapp.com', 'http://backsupport-client.herokuapp.com']
 
 
-  # config.web_socket_server_url = "wss:///cable" 
+  config.web_socket_server_url = "wss://backsupport-api.herokuapp.com/cable" 
 
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
