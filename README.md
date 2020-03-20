@@ -1,24 +1,41 @@
-# README
+# BackSupport API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Ticketing system based on Zendesk backend
 
-Things you may want to cover:
 
-* Ruby version
+Hosted on Heroku: http://backsupport-api.herokuapp.com/
 
-* System dependencies
+## Getting Started
 
-* Configuration
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-* Database creation
+### Prerequisites
+Ruby
 
-* Database initialization
+Rails
 
-* How to run the test suite
+### Running on local machine
 
-* Services (job queues, cache servers, search engines, etc.)
+First, install the dependencies of the app/set up the database by running the following commands in the root directory:
 
-* Deployment instructions
+```
+bundle install
 
-* ...
+rake db:migrate
+
+```
+
+
+After you have bundle installed, you can now run the rails server with this:
+
+```
+rails s
+```
+
+Then, please seed the database with the following command:
+
+```
+rake db:seed
+```
+
+Then, you have to set up [backsupport-client](https://github.com/jhcheung/backsupport-client) in order to use the api.
