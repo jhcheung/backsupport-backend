@@ -22,7 +22,6 @@ First, install the dependencies of the app/set up the database by running the fo
 bundle install
 
 rake db:migrate
-
 ```
 
 
@@ -38,4 +37,13 @@ Then, please seed the database with the following command:
 rake db:seed
 ```
 
-Then, you have to set up [backsupport-client](https://github.com/jhcheung/backsupport-client) in order to use the api.
+Then, you have to set up [backsupport-client](https://github.com/jhcheung/backsupport-client) in order to use the api. API endpoints consist of
+
+```
+/api/v1/users
+
+/api/v1/tickets
+
+/api/v1/messages
+```
+
