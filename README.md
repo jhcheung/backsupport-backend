@@ -47,3 +47,4 @@ Then, you have to set up [backsupport-client](https://github.com/jhcheung/backsu
 /api/v1/messages
 ```
 
+Data is serialized using Fast JSON.
